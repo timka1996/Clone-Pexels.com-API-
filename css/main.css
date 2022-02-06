@@ -60,41 +60,26 @@ header p{
 }
 
 .gallery{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    padding: 2rem 0;
-    width: 80%;
-    margin: auto;
-    row-gap: 5rem;
-    column-gap: 3rem;
-}
-.gallery-info{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    color: grey;
-    padding: 0.5rem 0;
+    padding: 50px;
 }
-.gallery-info a{
-    color: grey;
+.gallery-list{
+    width: 33%;
+    margin-bottom: 40px;
 }
-.gallery-info img{
+.gallery-list .title{
+    display: flex;
+}
+.gallery-list .title a{
+    margin-left: 200px;
+}
+.gallery-list img{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.15s linear;
-}
-
-.gallery-img img:hover{
-    filter: grayscale(var(--value, 100%));
 }
 .nav-button{
-    min-height: 30vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   margin: 10px 720px;
 }
 .more{
     padding: 1rem 3rem;

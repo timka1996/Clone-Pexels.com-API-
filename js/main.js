@@ -10,6 +10,8 @@ const more = document.querySelector('.more')
 let currentSearch
 
 
+
+
 // Event Listeners
 searchInput.addEventListener('input', updateInput)
 form.addEventListener('submit', (e)=>{
@@ -19,7 +21,8 @@ form.addEventListener('submit', (e)=>{
 })
 more.addEventListener('click', loadMore)
 
-// Update Input
+
+
 function updateInput(e){
     searchValue = e.target.value
 }
@@ -37,43 +40,36 @@ async function fetchApi(url){
     return data;
 }
 
-// Generate photos
 function generatePictures(data){
-  data.photos.forEach(photo => {
-      const galleryImg = document.createElement('div')
-      galleryImg.classList.add('gallery-img')
-      galleryImg.innerHTML = `
-      <div class='gallery-info'>
-        <p>${photo.photographer}</p>
-        <a href='${photo.src.large}' target='_blank'>Download</a>
-      </div>
-      <img src='${photo.src.large}'></img>
-      `
-      gallery.appendChild(galleryImg)
-  });
+    data.photos.forEach(e => {
+        const imgData = document.createElement('div')
+        imgData.classList.add('gallery-list')
+        imgData.innerHTML = `
+            <div class='title'>
+                <p>${e.photographer}</p>
+                <a href=${e.src.large}>Download</a>
+            </div>
+            <img src=${e.src.large}></img>
+        `
+        gallery.append(imgData)
+    });
 }
+
 async function curatedPhotos(){
-    fetchLink = "https://api.pexels.com/v1/curated?per_page=15&page=1"
-    const data = await fetchApi(fetchLink)
+    const data = await fetchApi("https://api.pexels.com/v1/curated?per_page=15$page_1")
     generatePictures(data)
 }
 
 curatedPhotos()
 
-// Clear
-function clear(){
+async function searchPhotos(query){
     gallery.innerHTML = ''
     searchInput.innerHTML = ''
-}
-
-
-// Search Photos
-async function searchPhotos(){
-    clear()
-    fetchLink = `https://api.pexels.com/v1/search?query=${query}+query&per_page=15&page=1`
+    let fetchLink = `https://api.pexels.com/v1/search?query=${query}&per_page=15&page=1`
     const data = await fetchApi(fetchLink)
     generatePictures(data)
 }
+
 
 // Load more
 async function loadMore(){
@@ -86,3 +82,84 @@ async function loadMore(){
     const data = await fetchApi(fetchLink)
     generatePictures(data)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*function generatePictures(data){
+    data.photos.forEach(e => {
+        const img = document.createElement('div')
+        img.classList.add('gallery_img')
+        img.innerHTML = `
+            <div class='gallery-info'>
+                <p>${e.photographer}</p>
+                <a href=${e.src.large}>Download</a>
+            </div>
+            <img src=${e.src.large}>
+        `
+        gallery.append(img)
+
+    });
+  console.log(gallery)
+}
+
+async function curatedPhotos(){
+    const fetchData = await fetchApi("https://api.pexels.com/v1/curated?per_page=6&page_1")
+    generatePictures(fetchData)
+}
+
+curatedPhotos()*/
